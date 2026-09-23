@@ -27,6 +27,24 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
+  # services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
+  services.gnome.core-apps.enable = false;
+  services.gnome.sushi.enable = true;
+  environment.gnome.excludePackages = [ pkgs.gnome-tour ];
+
+  programs.niri.enable = true;
+  programs.niri.useNautilus = true;
+
+  programs.dms-shell.enable = true;
+  services.displayManager.dms-greeter.enable = true;
+  services.displayManager.dms-greeter.compositor.name = "niri";
+
+  services.xserver.excludePackages = [ pkgs.xterm ];
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.open = true;
+
   services.xserver.xkb = {
     layout = "br";
     variant = "";
@@ -35,7 +53,7 @@
 
   services.printing.enable = true;
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -44,60 +62,28 @@
     pulse.enable = true;
   };
 
-  services.xserver.enable = true;
-  services.xserver.excludePackages = [ pkgs.xterm ];
-
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.gnome.core-utilities.enable = false;
-  services.gnome.sushi.enable = true;
-  environment.gnome.excludePackages = [ pkgs.gnome-tour ];
-  qt.platformTheme = "gnome";
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true;
-
-  users.users.patrickg = {
+  users.users."patrickg" = {
     isNormalUser = true;
     description = "Patrick Girardi";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" "vboxusers" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
-    #  thunderbird
+      # firefox
     ];
   };
-
-  services.flatpak.enable = true;
-  xdg.portal.enable = true;
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-33.4.11"
-  ];
-
 
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
   environment.shells = with pkgs; [ fish ];
   programs.starship.enable = true;
 
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        packages = [(pkgs.OVMF.override {
-          secureBoot = true;
-          tpmSupport = true;
-        }).fd];
-      };
-    };
-  };
-  virtualisation.virtualbox.host.enable = true;
   virtualisation.docker.enable = true;
-  programs.virt-manager.enable = true;
 
-  system.stateVersion = "24.11";
+  nixpkgs.config.allowUnfree = true;
+
+  system.copySystemConfiguration = true;
+
+  system.stateVersion = "26.05";
 }

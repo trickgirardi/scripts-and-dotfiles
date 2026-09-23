@@ -1,124 +1,132 @@
 { pkgs, ... } : {
   environment.systemPackages = with pkgs; [
-    vim
+    # CORE UTILS
+    neovim
+    micro-full
     wget
     fastfetch
     tmux
+    zellij
     git
+    ffmpeg
+    grim
 
+    # CORE APPS
+    firefox
     brave
-    bitwarden-desktop
-    ente-auth
-    onlyoffice-bin
-    qbittorrent
-    discord
-    zapzap
-    zoom-us
+    nautilus
+    onlyoffice-desktopeditors
+    ghostty
 
+    # DEV APPS
     vscode
-    code-cursor
     zed-editor
-    postman
     bruno
-    insomnia
     beekeeper-studio
-    warp-terminal
     termius
-    figma-linux
 
+    # GNOME APPS
     gnome-weather
     gnome-clocks
     gnome-calendar
-    gnome-disk-utility
-    gnome-font-viewer
-    gnome-calculator
-    gnome-boxes
-    gnome-console
     gnome-tweaks
-    gnome-text-editor
-    geary
+    gnome-calculator
+    gnome-font-viewer
     file-roller
-    nautilus
     eog
-
     evince
-    gnome-frog
-    resources
-    celluloid
-    dialect
-    gearlever
-    g4music
-    pdfarranger
-    devtoolbox
-    apostrophe
-    blackbox-terminal
-    junction
+    polkit_gnome
 
-    audacity
-    kdenlive
+    # UTILITARY APPS
+    gearlever
+    devtoolbox
+    resources
+    qbittorrent
+    flameshot
+    stremio-linux-shell
+    zapzap
+    wpsoffice
+
+    # SERVICES
+    ente-web
+    filen-desktop
+    proton-vpn
+    proton-pass
+    protonmail-desktop
+    proton-authenticator
+
+    # VIDEO
+    celluloid
+    kdePackages.kdenlive
     obs-studio
     handbrake
-    losslesscut-bin
     parabolic
     openshot-qt
-    davinci-resolve
 
+    # GRAPHICS
     krita
     gthumb
     upscayl
     switcheroo
-    ffmpeg
+    pinta
 
+    # SOUND
+    audacity
     easyeffects
     cavalier
     spotify
     spotdl
 
+    # VIRTUALIZATION
+    gnome-boxes
     wine
     bottles
     quickemu
     quickgui
+    winboat
+    lutris
 
-    nerdfonts
-    sassc
-    gtk-engine-murrine
-    gnome-themes-extra
+    # FONTS
+    font-awesome
+    nerd-fonts.zed-mono
+    nerd-fonts.ubuntu
+    nerd-fonts.inconsolata-go
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.caskaydia-cove
+    nerd-fonts.geist-mono
+
+    # THEMING
     adw-gtk3
     yaru-theme
-    font-awesome
     colloid-gtk-theme
     colloid-icon-theme
     bibata-cursors-translucent
+
+    # GNOME THEMING
+    sassc
+    gtk-engine-murrine
+    gnome-themes-extra
     qgnomeplatform-qt6
     qgnomeplatform
 
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.clipboard-indicator
-    gnomeExtensions.caffeine
-    gnomeExtensions.appindicator
-    gnomeExtensions.tiling-assistant
-    gnomeExtensions.gnome-40-ui-improvements
-    gnomeExtensions.gsconnect
-    gnomeExtensions.rounded-window-corners-reborn
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.window-gestures
-
-    nodejs_22
+    # DEV ENV
+    nodejs
     pnpm
-    yarn
-    nest-cli
-
-    python314
-    poetry
-
+    bun
+    python3
+    uv
     go
     rustc
 
-    # FLATPAK APPS
-    # Zen Browser
-    # REAL Video Enhancer
+    # AI TOOLS
+    claude-code
+    codex
+    opencode
+    opencode-desktop
+    code-cursor
+  ];
 
-    # APPIMAGE APPS
-    # Capacities
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-40.10.5"
   ];
 }
